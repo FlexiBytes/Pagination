@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/FlexiBytes/Pagination.svg?branch=master)](https://travis-ci.org/FlexiBytes/Pagination)
 
 # Pagination
 This module provides a basic pagination
