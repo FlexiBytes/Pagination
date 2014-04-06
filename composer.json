@@ -10,5 +10,11 @@
 
     "config": {
         "bin-dir": "bin/"
-    }
+    },
+
+    "suggest": {
+		"ext-http":   "*",
+		"ext-curl":   "*",
+		"ext-mcrypt": "*"
+	},
 }
