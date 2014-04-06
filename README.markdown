@@ -15,7 +15,7 @@ Usage
     $pagination->setNumberOfItemsPerPage(20);
 
     // Set the current page
-    $pagination->current_page(3);
+    $pagination->setCurrentPage(3);
 
     // Get number of total pages
     $pagination->getNumberOfTotalPages();
@@ -25,3 +25,16 @@ Usage
 
     // Get the offset for DB query
     $pagination->getOffset();
+
+Create a View
+-----
+The included views and templates are supposed to be used with mustache.php
+
+    // Create the view, bin the pagination class to it
+    $view = new \FlexiBytes\Pagination\View\Fragmented;
+    $view->bind('pagination', $pagination);
+
+    // Render the template
+    $m = new \Mustache_Engine;
+    $template = './src/FlexiBytes/Pagination/Templates/Fragmented.mustache';
+    echo $m->render(file_get_contents($template), $view);
