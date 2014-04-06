@@ -47,6 +47,29 @@ class PaginationSpec extends ObjectBehavior
         $this->setCurrentPage(5)->shouldHaveType('FlexiBytes\Pagination\Pagination');
     }
 
+    function it_should_have_a_get_current_page_method()
+    {
+        $this->setCurrentPage(5)->getCurrentPage()->shouldReturn(5);
+    }
+
+    function it_should_have_a_get_previous_page_method()
+    {
+        $this
+            ->setNumberOfTotalItems(120)
+            ->setNumberOfItemsPerPage(10)
+            ->setCurrentPage(3)
+            ->getPreviousPage()->shouldReturn(2);
+    }
+
+    function it_should_have_a_get_next_page_method()
+    {
+        $this
+            ->setNumberOfTotalItems(120)
+            ->setNumberOfItemsPerPage(10)
+            ->setCurrentPage(3)
+            ->getNextPage()->shouldReturn(4);
+    }
+
     function it_should_have_a_get_total_number_of_pages_method()
     {
         $this->getNumberOfTotalPages()->shouldBeInteger();

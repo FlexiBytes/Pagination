@@ -1,0 +1,25 @@
+<ul class="pagination">
+    {{#getFirstPage}}
+    <li class="first"><a href="{{url}}" title="{{title}}">&lt;&lt;</a></li>
+    {{/getFirstPage}}
+
+    {{#getPreviousPage}}
+    <li class="prev"><a href="{{url}}" title="{{title}}">&lt;</a></li>
+    {{/getPreviousPage}}
+
+    <li class="spacer">&nbsp;</li>
+
+    {{#getAllPages}}
+    <li class="middle {{#isCurrentPage}} current{{/isCurrentPage}}"><a href="{{url}}" title="{{title}}">{{page}}</a></li>
+    {{/getAllPages}}
+
+    <li class="spacer">&nbsp;</li>
+
+    {{#getNextPage}}
+    <li class="next"><a href="{{url}}" title="{{title}}">&gt;</a></li>
+    {{/getNextPage}}
+
+    {{#getLastPage}}
+    <li class="last"><a href="{{url}}" title="{{title}}">&gt;&gt;</a></li>
+    {{/getLastPage}}
+</ul>

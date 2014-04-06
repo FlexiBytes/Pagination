@@ -55,7 +55,7 @@ class Pagination
      * @author Thorsten Schmidt
      * @date 04.04.14
      */
-    public function factory()
+    public static function factory()
     {
         return new static;
     }
@@ -115,6 +115,48 @@ class Pagination
     {
         $this->current_page = max(1, abs($current_page));
         return $this;
+    }
+
+    /**
+     * Get the numer of the current page
+     *
+     * @return integer current page
+     * @access  public
+     *
+     * @author Thorsten Schmidt
+     * @date 04.04.2014
+     */
+    public function getCurrentPage()
+    {
+        return $this->current_page;
+    }
+
+    /**
+     * Get the numer of the previous page
+     *
+     * @return integer previous page
+     * @access  public
+     *
+     * @author Thorsten Schmidt
+     * @date 06.04.2014
+     */
+    public function getPreviousPage()
+    {
+        return max(1, $this->current_page - 1);
+    }
+
+    /**
+     * Get the numer of the next page
+     *
+     * @return integer next page
+     * @access  public
+     *
+     * @author Thorsten Schmidt
+     * @date 06.04.2014
+     */
+    public function getNextPage()
+    {
+        return min($this->current_page + 1, $this->getNumberOfTotalPages());
     }
 
     /**
