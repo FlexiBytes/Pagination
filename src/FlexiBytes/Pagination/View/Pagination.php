@@ -196,7 +196,7 @@ abstract class Pagination
                 'page'          => $page,
                 'isCurrentPage' => (bool) ($this->pagination->getCurrentPage() == $page),
                 'title'         => strtr(gettext('Go to page :page'), array(':page' => $page)),
-                'url'               => $this->prepareURL($page),
+                'query'               => $this->prepareQuery($page),
             );
         }
         return $return;
@@ -221,7 +221,7 @@ abstract class Pagination
             'page'              => 1,
             'isCurrentPage'   => $this->pagination->getCurrentPage() == 1,
             'title'             => gettext('Go to first page'),
-            'url'               => $this->prepareURL(1),
+            'query'               => $this->prepareQuery(1),
         );
     }
 
@@ -244,7 +244,7 @@ abstract class Pagination
             'page'              => $this->pagination->getPreviousPage(),
             'isCurrentPage'     => $this->pagination->getCurrentPage() == $this->pagination->getPreviousPage(),
             'title'             => gettext('Go to previous page'),
-            'url'               => $this->prepareURL($this->pagination->getPreviousPage()),
+            'query'               => $this->prepareQuery($this->pagination->getPreviousPage()),
         );
     }
 
@@ -267,7 +267,7 @@ abstract class Pagination
             'page'              => $this->pagination->getNextPage(),
             'isCurrentPage'     => $this->pagination->getCurrentPage() == $this->pagination->getNextPage(),
             'title'             => gettext('Go to next page'),
-            'url'               => $this->prepareURL($this->pagination->getNextPage()),
+            'query'               => $this->prepareQuery($this->pagination->getNextPage()),
         );
     }
 
@@ -290,34 +290,29 @@ abstract class Pagination
             'page'           => $this->pagination->getNumberOfTotalPages(),
             'isCurrentPage'  => $this->pagination->getCurrentPage() == $this->pagination->getNumberOfTotalPages(),
             'title'          => gettext('Go to last page'),
-            'url'            => $this->prepareURL($this->pagination->getNumberOfTotalPages()),
+            'query'            => $this->prepareQuery($this->pagination->getNumberOfTotalPages()),
         );
     }
 
-    protected $url;
+    protected $query;
 
     /**
-     * prepare the url with appropriate page setting
+     * prepare the query with appropriate page setting
      *
-     * @return string URL
+     * @param integer $page page number
+     *
+     * @return string query
      *
      * @access	protected
      *
      * @author Thorsten Schmidt
      * @date 05.04.14
      */
-    protected function prepareURL($page)
+    protected function prepareQuery($page)
     {
-        $url = parse_url($this->url);
-
-        $query = array();
-        if (! empty($url['query'])) {
-            parse_str($url['query'], $query);
-        }
+        parse_str($this->query, $query);
         $query['page'] = $page;
 
-        $url['query'] = http_build_query($query);
-
-        return http_build_url($url);
+        return http_build_query($query);
     }
 }

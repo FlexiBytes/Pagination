@@ -43,13 +43,13 @@ class AllpagesSpec extends ObjectBehavior
             ->setNumberOfTotalItems(120)
             ->setNumberOfItemsPerPage(10);
 
-        $this->set('url', 'http://www.test.url/?key=value&page=3&key2=value2');
+        $this->set('query', 'key=value&page=3&key2=value2');
 
         $expected = array(
             'page' => 1,
             'isCurrentPage' => true,
             'title' => 'Go to first page',
-            'url' => 'http://www.test.url/?key=value&page=1&key2=value2'
+            'query' => 'key=value&page=1&key2=value2'
         );
 
         $this->set('pagination', $pagination)->getFirstPage()->shouldReturn($expected);
@@ -62,13 +62,13 @@ class AllpagesSpec extends ObjectBehavior
             ->setNumberOfTotalItems(120)
             ->setNumberOfItemsPerPage(10);
 
-        $this->set('url', 'http://www.test.url/?key=value&page=3&key2=value2');
+        $this->set('query', 'key=value&page=3&key2=value2');
 
         $expected = array(
             'page' => 2,
             'isCurrentPage' => false,
             'title' => 'Go to previous page',
-            'url' => 'http://www.test.url/?key=value&page=2&key2=value2'
+            'query' => 'key=value&page=2&key2=value2'
         );
 
         $this->set('pagination', $pagination)->getPreviousPage()->shouldReturn($expected);
@@ -81,13 +81,13 @@ class AllpagesSpec extends ObjectBehavior
             ->setNumberOfTotalItems(120)
             ->setNumberOfItemsPerPage(10);
 
-        $this->set('url', 'http://www.test.url/?key=value&page=3&key2=value2');
+        $this->set('query', 'key=value&page=3&key2=value2');
 
         $expected = array(
             'page' => 4,
             'isCurrentPage' => false,
             'title' => 'Go to next page',
-            'url' => 'http://www.test.url/?key=value&page=4&key2=value2'
+            'query' => 'key=value&page=4&key2=value2'
         );
 
         $this->set('pagination', $pagination)->getNextPage()->shouldReturn($expected);
@@ -100,13 +100,13 @@ class AllpagesSpec extends ObjectBehavior
             ->setNumberOfTotalItems(120)
             ->setNumberOfItemsPerPage(10);
 
-        $this->set('url', 'http://www.test.url/?key=value&page=3&key2=value2');
+        $this->set('query', 'key=value&page=3&key2=value2');
 
         $expected = array(
             'page' => 12,
             'isCurrentPage' => false,
             'title' => 'Go to last page',
-            'url' => 'http://www.test.url/?key=value&page=12&key2=value2'
+            'query' => 'key=value&page=12&key2=value2'
         );
 
         $this->set('pagination', $pagination)->getLastPage()->shouldReturn($expected);
@@ -128,20 +128,20 @@ class AllpagesSpec extends ObjectBehavior
             ->setNumberOfTotalItems(14)
             ->setNumberOfItemsPerPage(10);
 
-        $this->set('url', 'http://www.test.url/?key=value&page=1&key2=value2');
+        $this->set('query', 'key=value&page=1&key2=value2');
 
         $expected = array(
             0 => array(
                 'page' => 1,
                 'isCurrentPage' => true,
                 'title' => 'Go to page 1',
-                'url' => 'http://www.test.url/?key=value&page=1&key2=value2'
+                'query' => 'key=value&page=1&key2=value2'
             ),
             1 => array(
                 'page' => 2,
                 'isCurrentPage' => false,
                 'title' => 'Go to page 2',
-                'url' => 'http://www.test.url/?key=value&page=2&key2=value2'
+                'query' => 'key=value&page=2&key2=value2'
             ),
         );
 
@@ -157,13 +157,13 @@ class AllpagesSpec extends ObjectBehavior
                 'page' => 1,
                 'isCurrentPage' => false,
                 'title' => 'Go to page 1',
-                'url' => 'http://www.test.url/?key=value&page=1&key2=value2'
+                'query' => 'key=value&page=1&key2=value2'
             ),
             1 => array(
                 'page' => 2,
                 'isCurrentPage' => true,
                 'title' => 'Go to page 2',
-                'url' => 'http://www.test.url/?key=value&page=2&key2=value2'
+                'query' => 'key=value&page=2&key2=value2'
             ),
         );
 
