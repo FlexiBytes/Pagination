@@ -310,15 +310,13 @@ abstract class Pagination
     {
         $url = parse_url($this->url);
 
-        $query = new \HttpQueryString(false);
-
+        $query = array();
         if (! empty($url['query'])) {
-            $query->set($url['query']);
+            parse_str($url['query'], $query);
         }
+        $query['page'] = $page;
 
-        $query->set(array('page' => $page));
-
-        $url['query'] = $query->toString();
+        $url['query'] = http_build_query($query);
 
         return http_build_url($url);
     }
