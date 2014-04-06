@@ -6,6 +6,7 @@ before_script:
   - composer selfupdate
   - composer install --prefer-source
   - printf "\n" | pecl install pecl_http
+  - echo "extension=http.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 script:
   - bin/phpspec run
