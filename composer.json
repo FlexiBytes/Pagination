@@ -16,5 +16,5 @@
 		"ext-http":   "*",
 		"ext-curl":   "*",
 		"ext-mcrypt": "*"
-	},
+	}
 }
