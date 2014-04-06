@@ -196,6 +196,7 @@ abstract class Pagination
                 'page'          => $page,
                 'isCurrentPage' => (bool) ($this->pagination->getCurrentPage() == $page),
                 'title'         => strtr(gettext('Go to page :page'), array(':page' => $page)),
+                'url'               => $this->prepareURL($page),
             );
         }
         return $return;
@@ -220,6 +221,7 @@ abstract class Pagination
             'page'              => 1,
             'isCurrentPage'   => $this->pagination->getCurrentPage() == 1,
             'title'             => gettext('Go to first page'),
+            'url'               => $this->prepareURL(1),
         );
     }
 
@@ -242,6 +244,7 @@ abstract class Pagination
             'page'              => $this->pagination->getPreviousPage(),
             'isCurrentPage'     => $this->pagination->getCurrentPage() == $this->pagination->getPreviousPage(),
             'title'             => gettext('Go to previous page'),
+            'url'               => $this->prepareURL($this->pagination->getPreviousPage()),
         );
     }
 
@@ -264,6 +267,7 @@ abstract class Pagination
             'page'              => $this->pagination->getNextPage(),
             'isCurrentPage'     => $this->pagination->getCurrentPage() == $this->pagination->getNextPage(),
             'title'             => gettext('Go to next page'),
+            'url'               => $this->prepareURL($this->pagination->getNextPage()),
         );
     }
 
@@ -286,6 +290,36 @@ abstract class Pagination
             'page'           => $this->pagination->getNumberOfTotalPages(),
             'isCurrentPage'  => $this->pagination->getCurrentPage() == $this->pagination->getNumberOfTotalPages(),
             'title'          => gettext('Go to last page'),
+            'url'            => $this->prepareURL($this->pagination->getNumberOfTotalPages()),
         );
+    }
+
+    protected $url;
+
+    /**
+     * prepare the url with appropriate page setting
+     *
+     * @return string URL
+     *
+     * @access	protected
+     *
+     * @author Thorsten Schmidt
+     * @date 05.04.14
+     */
+    protected function prepareURL($page)
+    {
+        $url = parse_url($this->url);
+
+        $query = new \HttpQueryString(false);
+
+        if (! empty($url['query'])) {
+            $query->set($url['query']);
+        }
+
+        $query->set(array('page' => $page));
+
+        $url['query'] = $query->toString();
+
+        return http_build_url($url);
     }
 }
