@@ -46,6 +46,7 @@ class AllpagesSpec extends ObjectBehavior
         $this->set('query', 'key=value&page=3&key2=value2');
 
         $expected = array(
+            'text' => 'first',
             'page' => 1,
             'isCurrentPage' => true,
             'title' => 'Go to first page',
@@ -65,6 +66,7 @@ class AllpagesSpec extends ObjectBehavior
         $this->set('query', 'key=value&page=3&key2=value2');
 
         $expected = array(
+            'text' => 'prev',
             'page' => 2,
             'isCurrentPage' => false,
             'title' => 'Go to previous page',
@@ -84,6 +86,7 @@ class AllpagesSpec extends ObjectBehavior
         $this->set('query', 'key=value&page=3&key2=value2');
 
         $expected = array(
+            'text' => 'next',
             'page' => 4,
             'isCurrentPage' => false,
             'title' => 'Go to next page',
@@ -103,6 +106,7 @@ class AllpagesSpec extends ObjectBehavior
         $this->set('query', 'key=value&page=3&key2=value2');
 
         $expected = array(
+            'text' => 'last',
             'page' => 12,
             'isCurrentPage' => false,
             'title' => 'Go to last page',

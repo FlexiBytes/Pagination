@@ -218,10 +218,11 @@ abstract class Pagination
 
         // First page
         return array(
-            'page'              => 1,
-            'isCurrentPage'   => $this->pagination->getCurrentPage() == 1,
-            'title'             => gettext('Go to first page'),
-            'query'               => $this->prepareQuery(1),
+            'text'           => gettext('first'),
+            'page'           => 1,
+            'isCurrentPage'  => $this->pagination->getCurrentPage() == 1,
+            'title'          => gettext('Go to first page'),
+            'query'          => $this->prepareQuery(1),
         );
     }
 
@@ -241,10 +242,11 @@ abstract class Pagination
 
         // First page
         return array(
+            'text'              => gettext('prev'),
             'page'              => $this->pagination->getPreviousPage(),
             'isCurrentPage'     => $this->pagination->getCurrentPage() == $this->pagination->getPreviousPage(),
             'title'             => gettext('Go to previous page'),
-            'query'               => $this->prepareQuery($this->pagination->getPreviousPage()),
+            'query'             => $this->prepareQuery($this->pagination->getPreviousPage()),
         );
     }
 
@@ -264,10 +266,11 @@ abstract class Pagination
 
         // First page
         return array(
+            'text'              => gettext('next'),
             'page'              => $this->pagination->getNextPage(),
             'isCurrentPage'     => $this->pagination->getCurrentPage() == $this->pagination->getNextPage(),
             'title'             => gettext('Go to next page'),
-            'query'               => $this->prepareQuery($this->pagination->getNextPage()),
+            'query'             => $this->prepareQuery($this->pagination->getNextPage()),
         );
     }
 
@@ -287,10 +290,11 @@ abstract class Pagination
 
         // First page
         return array(
+            'text'           => gettext('last'),
             'page'           => $this->pagination->getNumberOfTotalPages(),
             'isCurrentPage'  => $this->pagination->getCurrentPage() == $this->pagination->getNumberOfTotalPages(),
             'title'          => gettext('Go to last page'),
-            'query'            => $this->prepareQuery($this->pagination->getNumberOfTotalPages()),
+            'query'          => $this->prepareQuery($this->pagination->getNumberOfTotalPages()),
         );
     }
 

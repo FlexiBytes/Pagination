@@ -7,13 +7,31 @@
     <li class="prev"><a href="./?{{query}}" title="{{title}}">{{text}}</a></li>
     {{/getPreviousPage}}
 
-    <li class="spacer">&nbsp;</li>
+    {{#getLeftPages}}
+    <li class="left {{#isCurrentPage}} current{{/isCurrentPage}}"><a href="./?{{query}}" title="{{title}}">{{page}}</a></li>
+    {{/getLeftPages}}
 
-    {{#getAllPages}}
+    {{#hasLeftEllipsis}}
+    <li class="ellipsis">[…]</li>
+    {{/hasLeftEllipsis}}
+    {{^hasLeftEllipsis}}
+    <li class="spacer">&nbsp;</li>
+    {{/hasLeftEllipsis}}
+
+    {{#getCenterPages}}
     <li class="middle {{#isCurrentPage}} current{{/isCurrentPage}}"><a href="./?{{query}}" title="{{title}}">{{page}}</a></li>
-    {{/getAllPages}}
+    {{/getCenterPages}}
 
+    {{#hasRightEllipsis}}
+    <li class="ellipsis">[…]</li>
+    {{/hasRightEllipsis}}
+    {{^hasRightEllipsis}}
     <li class="spacer">&nbsp;</li>
+    {{/hasRightEllipsis}}
+
+    {{#getRightPages}}
+    <li class="right{{#isCurrentPage}} current{{/isCurrentPage}}"><a href="./?{{query}}" title="{{title}}">{{page}}</a></li>
+    {{/getRightPages}}
 
     {{#getNextPage}}
     <li class="next"><a href="./?{{query}}" title="{{title}}">{{text}}</a></li>
