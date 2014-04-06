@@ -6,7 +6,7 @@
  * PHP version 5
  *
  * @category  Pagination
- * @package   FlexiBytes.SEPA
+ * @package   FlexiBytes.Pagination
  * @author    Thorsten Schmidt <t.schmidt@flexibytes.com>
  * @copyright 2014 FlexiBytes
  * @license   MIT License (MIT)
