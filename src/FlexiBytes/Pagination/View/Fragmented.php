@@ -82,7 +82,7 @@ class Fragmented extends Pagination
     {
         $this->checkSettings();
         return (bool) ( // Current page > left section
-                ($this->pagination->getCurrentPage() > ($this->amountOfLeftPages + $this->amountOfCenterPages + 1)) AND
+                ($this->pagination->getCurrentPage() > ($this->amountOfLeftPages + $this->amountOfCenterPages + 1)) and
                 // And there is more to come on right hand side
                 $this->pagination->getNumberOfTotalPages() > ($this->amountOfLeftPages + 2*$this->amountOfCenterPages + 1 + $this->amountOfRightPages));
     }
@@ -118,11 +118,11 @@ class Fragmented extends Pagination
         }
 
         // Actually not enough pages for fragmentated display?
-        if ($start > $this->pagination->getNumberOfTotalPages() OR $start < 1) {
+        if ($start > $this->pagination->getNumberOfTotalPages() or $start < 1) {
             $start = 1;
         }
 
-        if ($stop > $this->pagination->getNumberOfTotalPages() OR $stop < 1) {
+        if ($stop > $this->pagination->getNumberOfTotalPages() or $stop < 1) {
             $stop = 1;
         }
 
@@ -146,7 +146,7 @@ class Fragmented extends Pagination
     {
         $this->checkSettings();
         return (// We can still scroll right?
-                ($this->pagination->getCurrentPage() + $this->amountOfCenterPages < ($this->pagination->getNumberOfTotalPages() - $this->amountOfRightPages)) AND
+                ($this->pagination->getCurrentPage() + $this->amountOfCenterPages < ($this->pagination->getNumberOfTotalPages() - $this->amountOfRightPages)) and
                 // And there is more to come on right hand side
                 $this->pagination->getNumberOfTotalPages() > ($this->amountOfLeftPages + 2*$this->amountOfCenterPages + 1 + $this->amountOfRightPages)
         );
