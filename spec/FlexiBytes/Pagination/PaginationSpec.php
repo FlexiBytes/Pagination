@@ -49,7 +49,17 @@ class PaginationSpec extends ObjectBehavior
 
     function it_should_have_a_get_current_page_method()
     {
-        $this->setCurrentPage(5)->getCurrentPage()->shouldReturn(5);
+        $this
+            ->setNumberOfTotalItems(120)
+            ->setNumberOfItemsPerPage(10)
+            ->setCurrentPage(5)
+            ->getCurrentPage()
+            ->shouldReturn(5);
+    }
+
+    function it_should_adapt_get_current_page_to_available_pages()
+    {
+        $this->setCurrentPage(5)->getCurrentPage()->shouldReturn(1);
     }
 
     function it_should_have_a_get_previous_page_method()

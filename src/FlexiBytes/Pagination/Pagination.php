@@ -128,7 +128,7 @@ class Pagination
      */
     public function getCurrentPage()
     {
-        return $this->current_page;
+        return min($this->current_page, $this->getNumberOfTotalPages());
     }
 
     /**
