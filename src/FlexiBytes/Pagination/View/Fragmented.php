@@ -63,6 +63,10 @@ class Fragmented extends Pagination
     public function getLeftPages()
     {
         $this->checkSettings();
+
+        if ($this->pagination->getReverseOrder()) {
+            return $this->getPagesArray($this->pagination->getNumberOfTotalPages() - $this->amountOfRightPages + 1, $this->pagination->getNumberOfTotalPages());
+        }
         return $this->getPagesArray(1, $this->amountOfLeftPages);
     }
 
@@ -81,6 +85,14 @@ class Fragmented extends Pagination
     public function hasLeftEllipsis()
     {
         $this->checkSettings();
+
+        if ($this->pagination->getReverseOrder()) {
+            return (// We can still scroll right?
+                ($this->pagination->getCurrentPage() + $this->amountOfCenterPages < ($this->pagination->getNumberOfTotalPages() - $this->amountOfRightPages)) and
+                // And there is more to come on right hand side
+                $this->pagination->getNumberOfTotalPages() > ($this->amountOfLeftPages + 2*$this->amountOfCenterPages + 1 + $this->amountOfRightPages));
+        }
+
         return (bool) ( // Current page > left section
                 ($this->pagination->getCurrentPage() > ($this->amountOfLeftPages + $this->amountOfCenterPages + 1)) and
                 // And there is more to come on right hand side
@@ -145,6 +157,14 @@ class Fragmented extends Pagination
     public function hasRightEllipsis()
     {
         $this->checkSettings();
+
+        if ($this->pagination->getReverseOrder()) {
+            return (bool) ( // Current page > left section
+                ($this->pagination->getCurrentPage() > ($this->amountOfLeftPages + $this->amountOfCenterPages + 1)) and
+                // And there is more to come on right hand side
+                $this->pagination->getNumberOfTotalPages() > ($this->amountOfLeftPages + 2*$this->amountOfCenterPages + 1 + $this->amountOfRightPages));
+        }
+
         return (// We can still scroll right?
                 ($this->pagination->getCurrentPage() + $this->amountOfCenterPages < ($this->pagination->getNumberOfTotalPages() - $this->amountOfRightPages)) and
                 // And there is more to come on right hand side
@@ -166,6 +186,11 @@ class Fragmented extends Pagination
     public function getRightPages()
     {
         $this->checkSettings();
+
+        if ($this->pagination->getReverseOrder()) {
+            return $this->getPagesArray(1, $this->amountOfLeftPages);
+        }
+
         return $this->getPagesArray($this->pagination->getNumberOfTotalPages() - $this->amountOfRightPages + 1, $this->pagination->getNumberOfTotalPages());
     }
 }

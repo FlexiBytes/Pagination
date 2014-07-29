@@ -173,4 +173,55 @@ class AllpagesSpec extends ObjectBehavior
 
         $this->set('pagination', $pagination)->getAllPages()->shouldReturn($expected);
     }
+
+    function it_should_set_a_reversed_array_with_pages_informations()
+    {
+        $pagination = \FlexiBytes\Pagination\Pagination::factory()
+            ->setReverseOrder(true)
+            ->setCurrentPage(1)
+            ->setNumberOfTotalItems(14)
+            ->setNumberOfItemsPerPage(10);
+
+        $this->set('query', 'key=value&page=1&key2=value2');
+
+        $expected = array(
+            0 => array(
+                'page' => 2,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 2',
+                'query' => 'key=value&page=2&key2=value2'
+            ),
+            1 => array(
+                'page' => 1,
+                'isCurrentPage' => true,
+                'title' => 'Go to page 1',
+                'query' => 'key=value&page=1&key2=value2'
+            ),
+        );
+
+        $this->set('pagination', $pagination)->getAllPages()->shouldReturn($expected);
+
+        $pagination = \FlexiBytes\Pagination\Pagination::factory()
+            ->setReverseOrder(true)
+            ->setCurrentPage(2)
+            ->setNumberOfTotalItems(14)
+            ->setNumberOfItemsPerPage(10);
+
+        $expected = array(
+            0 => array(
+                'page' => 2,
+                'isCurrentPage' => true,
+                'title' => 'Go to page 2',
+                'query' => 'key=value&page=2&key2=value2'
+            ),
+            1 => array(
+                'page' => 1,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 1',
+                'query' => 'key=value&page=1&key2=value2'
+            ),
+        );
+
+        $this->set('pagination', $pagination)->getAllPages()->shouldReturn($expected);
+    }
 }

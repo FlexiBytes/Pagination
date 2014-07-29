@@ -199,6 +199,11 @@ abstract class Pagination
                 'query'               => $this->prepareQuery($page),
             );
         }
+
+        if ($this->pagination->getReverseOrder()) {
+            return array_reverse($return);
+        }
+
         return $return;
     }
 
@@ -219,10 +224,10 @@ abstract class Pagination
         // First page
         return array(
             'text'           => gettext('first'),
-            'page'           => 1,
-            'isCurrentPage'  => $this->pagination->getCurrentPage() == 1,
+            'page'           => $this->pagination->getFirstPage(),
+            'isCurrentPage'  => $this->pagination->getCurrentPage() == $this->pagination->getFirstPage(),
             'title'          => gettext('Go to first page'),
-            'query'          => $this->prepareQuery(1),
+            'query'          => $this->prepareQuery($this->pagination->getFirstPage()),
         );
     }
 
@@ -291,10 +296,10 @@ abstract class Pagination
         // First page
         return array(
             'text'           => gettext('last'),
-            'page'           => $this->pagination->getNumberOfTotalPages(),
-            'isCurrentPage'  => $this->pagination->getCurrentPage() == $this->pagination->getNumberOfTotalPages(),
+            'page'           => $this->pagination->getLastPage(),
+            'isCurrentPage'  => $this->pagination->getCurrentPage() == $this->pagination->getLastPage(),
             'title'          => gettext('Go to last page'),
-            'query'          => $this->prepareQuery($this->pagination->getNumberOfTotalPages()),
+            'query'          => $this->prepareQuery($this->pagination->getLastPage()),
         );
     }
 

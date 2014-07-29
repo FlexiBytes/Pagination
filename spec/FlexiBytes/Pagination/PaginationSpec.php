@@ -111,4 +111,15 @@ class PaginationSpec extends ObjectBehavior
             ->setCurrentPage(5)
             ->getOffset()->shouldReturn(40);
     }
+
+    function it_should_have_a_set_reverse_order_method()
+    {
+        $this->setReverseOrder()->shouldHaveType('FlexiBytes\Pagination\Pagination');
+    }
+
+    function it_should_have_a_get_reverse_order_method()
+    {
+        $this->getReverseOrder()->shouldReturn(false);
+        $this->setReverseOrder(true)->getReverseOrder()->shouldReturn(true);
+    }
 }

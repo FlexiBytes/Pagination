@@ -132,6 +132,23 @@ class Pagination
     }
 
     /**
+     * Get the numer of the first page
+     *
+     * @return integer first page
+     * @access  public
+     *
+     * @author Thorsten Schmidt
+     * @date 06.04.2014
+     */
+    public function getFirstPage()
+    {
+        if ($this->getReverseOrder()) {
+            return $this->getNumberOfTotalPages();
+        }
+        return 1;
+    }
+
+    /**
      * Get the numer of the previous page
      *
      * @return integer previous page
@@ -142,6 +159,9 @@ class Pagination
      */
     public function getPreviousPage()
     {
+        if ($this->getReverseOrder()) {
+            return min($this->getNumberOfTotalPages(), $this->current_page + 1);
+        }
         return max(1, $this->current_page - 1);
     }
 
@@ -156,7 +176,27 @@ class Pagination
      */
     public function getNextPage()
     {
+        if ($this->getReverseOrder()) {
+            return max(1, $this->current_page - 1);
+        }
         return min($this->current_page + 1, $this->getNumberOfTotalPages());
+    }
+
+    /**
+     * Get the numer of the next page
+     *
+     * @return integer next page
+     * @access  public
+     *
+     * @author Thorsten Schmidt
+     * @date 06.04.2014
+     */
+    public function getLastPage()
+    {
+        if ($this->getReverseOrder()) {
+            return 1;
+        }
+        return max(1, $this->getNumberOfTotalPages());
     }
 
     /**
@@ -199,5 +239,28 @@ class Pagination
     public function getOffset()
     {
         return ($this->number_of_items_per_page * $this->current_page) - $this->number_of_items_per_page;
+    }
+
+    protected $reverse = false;
+
+    /**
+     * Set the order of enumeration to be reversed
+     * having 1 as oldest page
+     *
+     * @return object   self
+     * @access  public
+     *
+     * @author Thorsten Schmidt
+     * @date 04.04.2014
+     */
+    public function setReverseOrder($reverse = true)
+    {
+        $this->reverse = $reverse;
+        return $this;
+    }
+
+    public function getReverseOrder()
+    {
+        return $this->reverse;
     }
 }

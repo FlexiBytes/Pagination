@@ -284,4 +284,127 @@ class FragmentedSpec extends ObjectBehavior
         $this->set('pagination', $pagination)->getRightPages()->shouldReturn($expected_right);
         $this->set('pagination', $pagination)->hasRightEllipsis()->shouldReturn(true);
     }
+
+    function it_should_set_a_reversed_array_with_pages_informations()
+    {
+        $pagination = \FlexiBytes\Pagination\Pagination::factory()
+            ->setReverseOrder(true)
+            ->setCurrentPage(1)
+            ->setNumberOfTotalItems(1420)
+            ->setNumberOfItemsPerPage(10);
+
+        $this->set('query', 'key=value&page=1&key2=value2');
+        $this->set('amountOfLeftPages', 2);
+        $this->set('amountOfRightPages', 2);
+/*
+        $expected = array(
+            0 => array(
+                'page' => 1,
+                'isCurrentPage' => true,
+                'title' => 'Go to page 1',
+                'query' => 'key=value&page=1&key2=value2'
+            ),
+            1 => array(
+                'page' => 2,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 2',
+                'query' => 'key=value&page=2&key2=value2'
+            ),
+        );
+
+        $this->set('pagination', $pagination)->getLeftPages()->shouldReturn($expected);
+*/
+        $pagination = \FlexiBytes\Pagination\Pagination::factory()
+            ->setReverseOrder(true)
+            ->setCurrentPage(8)
+            ->setNumberOfTotalItems(1420)
+            ->setNumberOfItemsPerPage(10);
+
+        $expected_right = array(
+            0 => array(
+                'page' => 1,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 1',
+                'query' => 'key=value&page=1&key2=value2'
+            ),
+            1 => array(
+                'page' => 2,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 2',
+                'query' => 'key=value&page=2&key2=value2'
+            ),
+        );
+
+        $expected_center = array(
+            0 => array(
+                'page' => 5,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 5',
+                'query' => 'key=value&page=5&key2=value2'
+            ),
+            1 => array(
+                'page' => 6,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 6',
+                'query' => 'key=value&page=6&key2=value2'
+            ),
+            2 => array(
+                'page' => 7,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 7',
+                'query' => 'key=value&page=7&key2=value2'
+            ),
+            3 => array(
+                'page' => 8,
+                'isCurrentPage' => true,
+                'title' => 'Go to page 8',
+                'query' => 'key=value&page=8&key2=value2'
+            ),
+            4 => array(
+                'page' => 9,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 9',
+                'query' => 'key=value&page=9&key2=value2'
+            ),
+            5 => array(
+                'page' => 10,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 10',
+                'query' => 'key=value&page=10&key2=value2'
+            ),
+            6 => array(
+                'page' => 11,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 11',
+                'query' => 'key=value&page=11&key2=value2'
+            ),
+        );
+
+        $expected_left = array(
+            0 => array(
+                'page' => 141,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 141',
+                'query' => 'key=value&page=141&key2=value2'
+            ),
+            1 => array(
+                'page' => 142,
+                'isCurrentPage' => false,
+                'title' => 'Go to page 142',
+                'query' => 'key=value&page=142&key2=value2'
+            ),
+        );
+
+        $expected_left = array_reverse($expected_left);
+        $expected_center = array_reverse($expected_center);
+        $expected_right = array_reverse($expected_right);
+
+        $this->set('pagination', $pagination)->getLeftPages()->shouldReturn($expected_left);
+        $this->set('pagination', $pagination)->hasLeftEllipsis()->shouldReturn(true);
+
+        $this->set('pagination', $pagination)->getCenterPages()->shouldReturn($expected_center);
+
+        $this->set('pagination', $pagination)->getRightPages()->shouldReturn($expected_right);
+        $this->set('pagination', $pagination)->hasRightEllipsis()->shouldReturn(true);
+    }
 }
