@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/FlexiBytes/Pagination.svg?branch=master)](https://travis-ci.org/FlexiBytes/Pagination)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/FlexiBytes/Pagination/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/FlexiBytes/Pagination/?branch=master)
 
 # Pagination
 This module provides a basic pagination
